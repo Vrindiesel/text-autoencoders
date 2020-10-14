@@ -1,0 +1,15 @@
+nltk==3.4.5
+numpy==1.18.1
+scikit-learn==0.23.1
+scipy==1.4.1
+spacy==2.1.0
+scikit-learn==0.23.1
+scipy==1.4.1
+tensorboard==2.2.2
+tensorboard-plugin-wit==1.6.0.post3
+tokenizers==0.8.1rc2
+toolz==0.10.0
+torch==1.4.0
+torchtext==0.3.1
+tqdm==4.46.1
+transformers==3.3.1
