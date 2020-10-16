@@ -129,6 +129,9 @@ if __name__ == '__main__':
     if args.reconstruct:
         sents = load_sent(args.data)
         z = encode(sents)
+
+        print("z:", z.shape)
+
         sents_rec = decode(z)
         write_z(z, os.path.join(args.checkpoint, args.output+'.z'))
         write_sent(sents_rec, os.path.join(args.checkpoint, args.output+'.rec'))
