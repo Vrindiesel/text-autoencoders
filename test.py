@@ -103,6 +103,8 @@ def calc_ppl(sents, m):
 
 if __name__ == '__main__':
     args = parser.parse_args()
+    print(args)
+
     vocab = Vocab(os.path.join(args.checkpoint, 'vocab.txt'))
     set_seed(args.seed)
     cuda = not args.no_cuda and torch.cuda.is_available()
@@ -155,11 +157,19 @@ if __name__ == '__main__':
         write_doc(si, os.path.join(args.checkpoint, args.output))
 
     if args.latent_nn:
+        print("latent nn")
         sents = load_sent(args.data)
         z = encode(sents)
+
         with open(os.path.join(args.checkpoint, args.output), 'w') as f:
+            print("z:", z.shape)
             nn = NearestNeighbors(n_neighbors=args.n).fit(z)
-            dis, idx = nn.kneighbors(z[:args.m])
+            print(nn._fit_method)
+            print("done fitting:", nn.effective_metric_)
+            _inp = z[:args.m]
+            print("_inp:", _inp.shape)
+            dis, idx = nn.kneighbors(_inp)
+            print(dis)
             for i in range(len(idx)):
                 f.write(' '.join(sents[i]) + '\n')
                 for j, d in zip(idx[i], dis[i]):
